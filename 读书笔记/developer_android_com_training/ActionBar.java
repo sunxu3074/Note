@@ -10,6 +10,7 @@
       	  android:name="com.mycompany.myfirstapp.DisplayMessageActivity"
       	  android:label="@string/title_activity_display_message"
       	  android:parentActivityName="com.mycompany.myfirstapp.MyActivity" >
+      	  <!-- Parent activity meta-data to support 4.0 and lower -->
       	  <meta-data
            	 android:name="android.support.PARENT_ACTIVITY"
              android:value="com.mycompany.myfirstapp.MyActivity" />
@@ -36,6 +37,7 @@
     3. android:showAsAction="ifRoom"  // should appear as action button
        android:showAsAction="never"   // should always be in the overflow (By default, all actions appear in the overflow 但是写出来更明确)
 
+
        If your app is using the Support Library
 
        需要自定义xml的命名空间
@@ -48,3 +50,41 @@
                       yourapp:showAsAction="ifRoom"  />
              ...
         </menu>
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); 
+       // If your minSdkVersion is 11 or higher, instead use: 
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+    4.define the action bar's background '
+
+      For Android 2.1 and higher
+
+      res/values/themes.xml
+
+
+      <?xml version="1.0" encoding="utf-8"?>
+      <resources>
+          <!-- the theme applied to the application or activity -->
+          <style name="CustomActionBarTheme"
+                parent="@style/Theme.AppCompat.Light.DarkActionBar">
+                //3.0 and higher
+                 <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+                 <!-- Support library compatibility -->
+                 <item name="actionBarStyle">@style/MyActionBar</item>
+          </style>
+
+          <!-- ActionBar styles -->
+          <style name="MyActionBar"
+                parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+                 //3.0 and higher
+                <item name="android:background">@drawable/actionbar_background</item>
+
+                <!-- Support library compatibility -->
+                <item name="background">@drawable/actionbar_background</item>
+          </style>
+      </resources>
+
