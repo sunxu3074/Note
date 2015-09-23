@@ -64,3 +64,7 @@
 
 
 		Communicating with Other Fragments
+
+		//发送广播
+		//构建一个interface
+		//待续 http://developer.android.com/training/basics/fragments/communicating.html
