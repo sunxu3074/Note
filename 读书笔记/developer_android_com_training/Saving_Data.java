@@ -147,3 +147,5 @@
 	    //存取一些重复或结构化数据 例如联系人
 
 	    //TODO update database ? 
+
+	    //Because they can be long-running, be sure that you call getWritableDatabase() or getReadableDatabase() in a background thread, such as with AsyncTask or IntentService.
