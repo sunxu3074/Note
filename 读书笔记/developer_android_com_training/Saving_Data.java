@@ -138,3 +138,12 @@
 				//当卸载应用时,系统会删除以下文件:
 				All files you saved on internal storage
 				All files you saved on external storage using getExternalFilesDir().
+
+
+
+
+	    Saving Data in SQL Databases
+
+	    //存取一些重复或结构化数据 例如联系人
+
+	    //TODO update database ? 
