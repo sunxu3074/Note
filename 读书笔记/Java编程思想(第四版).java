@@ -12,3 +12,8 @@
 
 	   为了执行后期绑定,Java使用一小段特殊的代码来代替绝对地址调用.
 	   
+
+	4. ArrayList
+	   LinkedList
+
+	5. 
