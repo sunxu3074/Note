@@ -1,7 +1,5 @@
 
 
-	Java编程思想(第四版)
-
 
 	1. Light light = new Light();
 	   light.on(); // 相当于对点灯发送一个on的消息 跟oc差不多
@@ -15,5 +13,3 @@
 
 	4. ArrayList
 	   LinkedList
-
-	5. 
