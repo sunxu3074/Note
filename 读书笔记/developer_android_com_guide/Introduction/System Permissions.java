@@ -24,5 +24,9 @@
 		User IDs and File Access
 
 		You can use the sharedUserId attribute in the AndroidManifest.xml‘s manifest tag of each package to have them assigned the same user ID.  By doing this, for purposes of security the two packages are then treated as being the same application, with the same user ID and file permissions. Note that in order to retain security, only two applications signed with the same signature (and requesting the same sharedUserId) will be given the same user ID.
+		//因为安全的强制实施是在进程级别上的，任何两个软件包的代码不能运行在同一进程上，因为它们需要以不同的Linux用户身份来运行(不同的UID).
+		//你可以通过在每个软件包里的AndroidManifest.xml 文件中设置sharedUserId 标签的属性值来请求系统赋予相同的UID. 如果这样做，安全机制会把这样两个app会被当做是同一个app，拥有相同的UID和文件权限. 请注意为了保持(记住)它们的安全权限，这两个app必须是使用相同的签名才能这么做
+
+
 
 
