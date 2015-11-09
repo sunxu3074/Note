@@ -24,7 +24,7 @@
 		  // 
 		  添加监听器,只能第一个点击的动作生效,或者第一个点击后,第二个点击让两个动作同时无效.
 
-		6.熟练使用
+		6.熟练使用 android desing library
 		  android.support.design.widget.AppBarLayout 
 		  FloatButton
 		  CardView

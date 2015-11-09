@@ -140,3 +140,5 @@
 			    Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
 			    mImageView.setImageBitmap(bitmap);
 			} 
+
+			=======================================================================================================================
