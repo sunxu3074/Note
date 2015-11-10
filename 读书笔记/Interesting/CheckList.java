@@ -29,4 +29,6 @@
 		  FloatButton
 		  CardView
 		  NavigationView
+
+		7.fragment和activity之间的交互
 		  
