@@ -174,6 +174,40 @@
 
 	    //存取一些重复或结构化数据 例如联系人
 
-	    //TODO update database ? 
+	    //Contract Clsss是一些常量的容器,组织contract类的一个好方法是在类的根层级定义一些全局变量，然后为每一个table来创建内部类
+	    public final class FeedReaderContract {
+		    // To prevent someone from accidentally instantiating the contract class,
+		    // give it an empty constructor.
+		    public FeedReaderContract() {}
 
-	    //Because they can be long-running, be sure that you call getWritableDatabase() or getReadableDatabase() in a background thread, such as with AsyncTask or IntentService.
+		    /* Inner class that defines the table contents */
+		    public static abstract class FeedEntry implements BaseColumns {
+		        public static final String TABLE_NAME = "entry";
+		        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
+		        public static final String COLUMN_NAME_TITLE = "title";
+		        public static final String COLUMN_NAME_SUBTITLE = "subtitle";
+		        ...
+		    }
+		}
+
+		//使用SQL Helper创建DB
+
+		//SQLiteOpenHelper的常量
+		private static final String TEXT_TYPE = " TEXT";
+		private static final String COMMA_SEP = ",";
+		private static final String SQL_CREATE_ENTRIES =
+		    "CREATE TABLE " + FeedReaderContract.FeedEntry.TABLE_NAME + " (" +
+		    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
+		    FeedReaderContract.FeedEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
+		    FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
+		    ... // Any other options for the CREATE command
+		    " )";
+
+		private static final String SQL_DELETE_ENTRIES =
+		    "DROP TABLE IF EXISTS " + TABLE_NAME_ENTRIES;
+		//Because they can be long-running, be sure that you call getWritableDatabase() or getReadableDatabase() in a background thread, such as with AsyncTask or IntentService.
+		//Note：因为那些操作可能是很耗时的，请确保在background thread（AsyncTask or IntentService）里面去执行 getWritableDatabase() 或者 getReadableDatabase() 。
+
+		//SQL Injection：(随着B/S模式应用开发的发展，使用这种模式编写应用程序的程序员也越来越多。但由于程序员的水平及经验也参差不齐，相当大一部分程序员在编写代码时没有对用户输入数据的合法性进行判断，使应用程序存在安全隐患。用户可以提交一段数据库查询代码，根据程序返回的结果，获得某些他想得知的数据，这就是所谓的SQL Injection，即SQL注入)
+
+		//和查询信息一样，删除数据同样需要提供一些删除标准。DB的API提供了一个防止SQL注入的机制来创建查询与删除标准。
