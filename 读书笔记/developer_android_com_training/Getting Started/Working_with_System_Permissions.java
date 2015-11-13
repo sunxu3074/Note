@@ -31,9 +31,22 @@
 
     	Check For Permissions
 
-    	
+    	//因为用户可随时收回权限,所以在需要一个dangerous permission时,每次都要检查
+
+    	// Assume thisActivity is the current activity 
+		int permissionCheck = ContextCompat.checkSelfPermission(thisActivity,
+		        Manifest.permission.WRITE_CALENDAR); 
+
+		return PackageManager.PERMISSION_GRANTED --> 可操作
+		return PackageManager.PERMISSION_DENIED --> 显示地向用户询问权限
 
 
+		Explain why the app needs permissions
+
+		//弹出一个dialog解释为什么需要这个权限(简短有力的解释)
+
+		shouldShowRequestPermissionRationale()
+		return true; --> 
 
 
 
