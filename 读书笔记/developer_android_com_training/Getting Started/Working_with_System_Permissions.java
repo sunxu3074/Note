@@ -109,4 +109,66 @@
 	-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 		Permissions Best Practices
+
+		Consider Using an Intent
+
+		执行一个任务有两种方式:
+		1.use permissions.
+		2.use an intent.
+
+		各自的优缺点:
+		If you use permissions: for example CAMERA permission
+		Your app has full control over the user experience when you perform the operation. However, such broad control adds to the complexity of your task, since you need to design an appropriate UI.
+		//执行操作时有全面的控制体验,然而你需要设计适当的UI会增加复杂性.
+		The user is prompted to give permission once, either at run time or at install time (depending on the user''s Android version). After that, your app can perform the operation without requiring additional interaction from the user. However, if the user doesn''t grant the permission (or revokes it later on), your app becomes unable to perform the operation at all.
+		//在运行时或者安装时用户会被提示权限(根据版本而定).接着,你的应用程序会执行操作不需要额外的用户操作.然而,如果用户没有授予这个权限,或者在之后收回权限,那么你的应用程序将会一直不能执行操作.
+		If you use an intent: for example ACTION_IMAGE_CAPTURE
+		You do not have to design the UI for the operation. The app that handles the intent provides the UI. However, this means you have no control over the user experience. The user could be interacting with an app you''ve never seen.
+		//不必设计UI.
+		If the user does not have a default app for the operation, the system prompts the user to choose an app. If the user does not designate a default handler, they may have to go through an extra dialog every time they perform the operation.
+		//如果没有默认程序执行操作,系统会提示用户选择app.如果用户没有指定一个默认的,则在每次执行这个操作时都会弹出dialog.
+
+
+		Only Ask for Permissions You Need
+		You should minimize the number of permissions your app needs.
+
+		Quite often your app can avoid requesting a permission by using an intent instead. If a feature is not a core part of your app''s functionality, you should consider handing the work over to another app, as described in Consider Using An Intent.
+		//很多时候你的应用程序通过用一个intent代替能避免获取权限操作.如果这个特性不是你程序的核心部分,你应该考虑让另外一个应用程序来处理.
+
+
+		Don''t Overwhelm the User
+
+		you should ask for permissions as you need them.
+
+
+		Explain Why You Need Permissions
+		a photography app might want to use location services so it can geotag the photos. A typical user might not understand that a photo can contain location information, and would be puzzled why their photography app wants to know the location. So in this case, it''s a good idea for the app to tell the user about this feature before calling requestPermissions().
+
+		One way to inform the user is to incorporate these requests into an app tutorial. The tutorial can show each of the app''s features in turn, and as it does this, it can explain what permissions are needed. For example, the photography app''s tutorial could demonstrate its "share photos with your contacts" feature, then tell the user that they need to give permission for the app to see the user''s contacts. The app could then call requestPermissions() to ask the user for that access. Of course, not every user is going to follow the tutorial, so you still need to check for and request permissions during the app''s normal operation.
+
+
+		Test for Both Permissions Models
+
+		Beginning with Android 6.0 (API level 23), users grant and revoke app permissions at run time, instead of doing so when they install the app. As a result, you''ll have to test your app under a wider range of conditions. Prior to Android 6.0, you could reasonably assume that if your app is running at all, it has all the permissions it declares in the app manifest. Under the new_permissions model, you can no longer make that assumption..
+		//自从Android6.0以后,用户在运行时授予和收回权限,不再是安装程序的时候.因此,你必须在更广泛的条件下测试您的应用程序.
+
+		The following tips will help you identify permissions-related code problems on devices running API level 23 or higher:
+
+		Identify your app’s current permissions and the related code paths.
+		//确定你的应用程序的当前的权限和相关的代码路径。
+		Test user flows across permission-protected services and data.
+		//测试用户跨权限保护的服务和数据流.
+		Test with various combinations of granted or revoked permissions. For example, a camera app might list CAMERA, READ_CONTACTS, and ACCESS_FINE_LOCATION in its manifest. You should test the app with each of these permissions turned on and off, to make sure the app can handle all permission configurations gracefully.
+		//在各种收回或者赋予权限之间的组合之间进行测试.确保你的应用程序能处理所有的权限配置.
+		Use the adb tool to manage permissions from the command line://用adb在命令行管理权限
+			List permissions and status by group://列出所有的权限状态
+				$ adb shell pm list permissions -d -g
+			Grant or revoke one or more permissions://赋予或者收回一个或更多权限
+				$ adb shell pm [grant|revoke] <permission-name> ...
+			Analyze your app for services that use permissions //分析应用中使用权限的服务
+
+
+
+
+			
 				
