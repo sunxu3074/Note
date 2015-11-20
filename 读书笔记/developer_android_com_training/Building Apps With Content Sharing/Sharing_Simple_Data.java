@@ -3,19 +3,29 @@
 	
 		Sending Simple Data to Other Apps
 
-			Send Text Content
+			Send Text Content//分享文本内容
 
 			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND); 
 			sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send."); 
 			sendIntent.setType("text/plain"); 
 			startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+			
 			// Intent.createChooser has some advantages:
-
 			Even if the user has previously selected a default action for this intent, the chooser will still be displayed.
+			//即使用户之前为这个intent设置了默认的action,选择界面还是会被显示
 			If no applications match, Android displays a system message.
+			//如果没有匹配的程序,Android会显示系统信息
 			You can specify a title for the chooser dialog.
+			//我们可以指定选择界面的标题
 
+			Here''s the updated code:
+			Intent sendIntent = new Intent();
+			sendIntent.setAction(Intent.ACTION_SEND); 
+			sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send."); 
+			sendIntent.setType("text/plain"); 
+			startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+			
 
 			Send Binary Content
 
@@ -25,10 +35,10 @@
 			shareIntent.setType("image/jpeg"); // You can use a MIME type of "*/*", but this will only match activities that are able to handle generic data streams.
 			startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
 
-
+			Note the following:
 			 create a ContentProvider like this is to use the FileProvider helper class.
 
-			 Use the system MediaStore. The MediaStore is primarily aimed at video, audio and image MIME types, however beginning with Android 3.0 (API level 11) it can also store non-media types 
+			Use the system MediaStore. The MediaStore is primarily aimed at video, audio and image MIME types, however beginning with Android 3.0 (API level 11) it can also store non-media types (see MediaStore.Files for more info). Files can be inserted into the MediaStore using scanFile() after which a content:  style Uri suitable for sharing is passed to the provided onScanCompleted() callback. Note that once added to the system MediaStore the content is accessible to any app on the device.
 
 
 			Send Multiple Pieces of Content
@@ -43,7 +53,9 @@
 			shareIntent.setType("image/*"); 
 			startActivity(Intent.createChooser(shareIntent, "Share images to.."));
 
+			//请确保指定到数据的URIs能够被接收程序所访问(添加访问权限)
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	Receiving Simple Data from Other Apps
 
@@ -115,9 +127,9 @@
 		    } 
 		} 
 		//remember to process binary data in a separate thread rather than the main ("UI") thread.
+		//由于无法知道其他程序发送过来的数据内容是文本还是其他类型的数据，若数据量巨大，则需要大量处理时间，因此我们应避免在UI线程里面去处理那些获取到的数据。
 
-
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	Adding an Easy Share Action
 
