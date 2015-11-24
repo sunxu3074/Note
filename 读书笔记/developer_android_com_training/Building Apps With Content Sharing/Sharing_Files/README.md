@@ -1,10 +1,12 @@
 
 
 
-		# Setting Up File Sharing
-		====
-		Android的FileProvider组件会基于在XML文件中的具体配置为文件创建Content URI。
-
+		# Setting Up File Sharing  
+		
+		---
+		
+		Android的FileProvider组件会基于在XML文件中的具体配置为文件创建Content URI。  
+		
 		## 指定FileProvider
 		
 
@@ -28,8 +30,10 @@
 		```
 		----
 
-		##指定可共享目录路径
-		下面的是一个“res/xml/filepaths.xml”的内容样例
+		##指定可共享目录路径  
+		
+		下面的是一个“res/xml/filepaths.xml”的内容样例  
+		
 		```java
 		<paths>
 		    <files-path path="images/" name="myimages" />
