@@ -35,9 +35,25 @@
 		6.final方法
 		  只有在想要明确禁止覆盖时,才将方法设置为final的.
 
-
-
-
+		7.
+		  public class Bettle extends Insect {
+		  	public static void main(String[] args){
+		  		
+		  	}
+		  }
+		
+		  public class Insect {
+		  	static {
+		  	    System.out.println("Insect static");
+		  	}
+		  }
+		  
+		  // output
+		  Insect static 
+		  
+		  当试图访问Bettle.main()时,加载器开始启动并找到Bettle类的编译代码(在名为Bettle.class的文件之中).在对它进行加载
+		  的过程中,编译器注意到它有一个基类(这是由关键字extends得知的),于是它继续进行加载.不管是否打算产生一个新的对象,
+		  这都要发生.
 
 
 
